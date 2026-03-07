@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,18 +10,41 @@
 
 <style>
 
+html, body{
+height:100%;
+}
+
 body{
+margin:0;
 font-family:Arial, sans-serif;
-background:#0f0f0f;
+background:linear-gradient(180deg,#0f0f0f,#1a1a1a);
 color:white;
 text-align:center;
-margin:0;
+min-height:100vh;
+display:flex;
+justify-content:center;
 }
 
 .container{
 max-width:460px;
-margin:auto;
+width:100%;
 padding:40px 20px;
+animation:fade 0.7s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+h1{
+margin-bottom:10px;
 }
 
 p{
@@ -28,12 +53,16 @@ line-height:1.6;
 }
 
 .section{
-margin-top:35px;
+margin-top:30px;
+background:#1a1a1a;
+padding:20px;
+border-radius:12px;
 }
 
 ul{
 list-style:none;
 padding:0;
+margin:0;
 }
 
 ul li{
@@ -44,23 +73,24 @@ opacity:0.9;
 .price{
 font-size:28px;
 font-weight:bold;
-margin-top:15px;
+margin-top:10px;
 }
 
 .link{
 display:block;
-background:white;
+background:#ffd000;
 color:black;
 padding:15px;
 margin-top:25px;
-border-radius:10px;
+border-radius:12px;
 text-decoration:none;
 font-weight:bold;
+transition:all 0.2s ease;
 }
 
 .link:hover{
-transform:scale(1.03);
-transition:0.2s;
+transform:translateY(-2px);
+box-shadow:0 6px 18px rgba(0,0,0,0.25);
 }
 
 .back{
@@ -72,6 +102,7 @@ color:white;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -81,15 +112,15 @@ color:white;
 <h1>Персональные тренировки</h1>
 
 <p>
-Персональная тренировка с <b>5-кратным чемпионом мира</b>.
+Персональная тренировка с <b>5-кратным чемпионом мира по пауэрлифтингу</b>.
 </p>
 
 <div class="section">
 
-<h2>На тренировке</h2>
+<h2>Что входит</h2>
 
 <ul>
-<li>✔ Разбор техники</li>
+<li>✔ Разбор техники упражнений</li>
 <li>✔ Составление программы тренировок</li>
 <li>✔ Развитие силы</li>
 <li>✔ Профилактика травм</li>
@@ -103,7 +134,8 @@ color:white;
 <h2>Где проходят</h2>
 
 <p>
-Москва, DDX Авентура
+Москва<br>
+DDX Авентура
 </p>
 
 </div>
@@ -113,12 +145,12 @@ color:white;
 <h2>Стоимость</h2>
 
 <div class="price">
-от 3000 руб. / тренировка
+от 3000 ₽ / тренировка
 </div>
 
 </div>
 
-<a class="link" href="https://t.me/blagovfit?text=Хочу%20персональную%20тренировку" target="_blank">
+<a class="link" href="https://t.me/blagovfit?text=Здравствуйте,%20хочу%20персональную%20тренировку" target="_blank">
 💬 Написать тренеру
 </a>
 
@@ -129,4 +161,5 @@ color:white;
 </div>
 
 </body>
+
 </html>
