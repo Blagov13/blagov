@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,18 +10,41 @@
 
 <style>
 
+html, body{
+height:100%;
+}
+
 body{
+margin:0;
 font-family:Arial, sans-serif;
-background:#0f0f0f;
+background:linear-gradient(180deg,#0f0f0f,#1a1a1a);
 color:white;
 text-align:center;
-margin:0;
+min-height:100vh;
+display:flex;
+justify-content:center;
 }
 
 .container{
 max-width:460px;
-margin:auto;
+width:100%;
 padding:40px 20px;
+animation:fade 0.7s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+h1{
+margin-bottom:10px;
 }
 
 p{
@@ -28,12 +53,16 @@ line-height:1.6;
 }
 
 .section{
-margin-top:35px;
+margin-top:30px;
+background:#1a1a1a;
+padding:20px;
+border-radius:12px;
 }
 
 ul{
 list-style:none;
 padding:0;
+margin:0;
 }
 
 ul li{
@@ -44,23 +73,24 @@ opacity:0.9;
 .price{
 font-size:28px;
 font-weight:bold;
-margin-top:15px;
+margin-top:10px;
 }
 
 .link{
 display:block;
-background:white;
+background:#ffd000;
 color:black;
 padding:15px;
 margin-top:25px;
-border-radius:10px;
+border-radius:12px;
 text-decoration:none;
 font-weight:bold;
+transition:all 0.2s ease;
 }
 
 .link:hover{
-transform:scale(1.03);
-transition:0.2s;
+transform:translateY(-2px);
+box-shadow:0 6px 18px rgba(0,0,0,0.25);
 }
 
 .back{
@@ -72,6 +102,7 @@ color:white;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -81,7 +112,7 @@ color:white;
 <h1>Онлайн тренировки</h1>
 
 <p>
-Персональное онлайн сопровождение от <b>5-кратного чемпиона мира</b>.
+Персональное онлайн сопровождение от <b>5-кратного чемпиона мира по пауэрлифтингу</b>.
 </p>
 
 <div class="section">
@@ -103,7 +134,7 @@ color:white;
 
 <ul>
 <li>Начинающим</li>
-<li>Опытным</li>
+<li>Опытным спортсменам</li>
 <li>Тем, кто хочет скорректировать форму</li>
 <li>Тем, кто хочет увеличить силу</li>
 <li>Тем, кто хочет тренироваться правильно</li>
@@ -116,7 +147,7 @@ color:white;
 <h2>Стоимость</h2>
 
 <div class="price">
-25000 руб. / месяц
+25 000 ₽ / месяц
 </div>
 
 </div>
@@ -132,4 +163,5 @@ color:white;
 </div>
 
 </body>
+
 </html>
