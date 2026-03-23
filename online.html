@@ -20,7 +20,7 @@ body{
     padding:40px 0;
 }
 .container{
-    max-width:460px;
+    max-width:500px;
     width:100%;
     padding:40px 20px;
     animation:fade 0.7s ease;
@@ -41,10 +41,74 @@ ul li{margin:8px 0; opacity:0.9;}
 .back{margin-top:25px; display:block; opacity:0.6; text-decoration:none; color:white; text-align:center;}
 .steps li{margin-bottom:12px; padding-left:28px; position:relative;}
 .steps li::before{content:"✔"; position:absolute; left:0; color:#ffd000;}
-.result-img{width:100%; border-radius:12px; margin-top:10px;}
 .faq li{margin-bottom:12px; padding-left:18px; position:relative;}
 .faq li::before{content:"❓"; position:absolute; left:0; color:#ffd000;}
 .counter{margin-top:15px; text-align:center; font-size:16px; color:#ffd000; font-weight:bold;}
+
+/* Стили для галереи результатов */
+.results-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.result-card {
+    background: #0f0f0f;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.result-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px 12px 0 0;
+}
+
+.result-caption {
+    padding: 12px 15px;
+    font-size: 14px;
+    color: #ffd000;
+    font-weight: 500;
+    background: #0a0a0a;
+    border-top: 1px solid #2a2a2a;
+}
+
+.result-caption span {
+    color: #ccc;
+    font-weight: normal;
+}
+
+/* Разделение на два типа результатов */
+.result-type {
+    margin-bottom: 20px;
+}
+
+.result-type h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #ffd000;
+    border-left: 3px solid #ffd000;
+    padding-left: 12px;
+}
+
+.badge {
+    display: inline-block;
+    background: #ffd000;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
 </style>
 </head>
 
@@ -81,10 +145,59 @@ ul li{margin:8px 0; opacity:0.9;}
 </div>
 
 <div class="section">
-<h2>Результаты клиентов</h2>
-<img class="lena2.jpg" src="https://via.placeholder.com/400x200?text=До/После" alt="До/После">
-<img class="devki.jpg" src="https://via.placeholder.com/400x200?text=До/После" alt="До/После">
-<p>Фото клиентов (анонимно) показывают реальные изменения за 1–3 месяца.</p>
+<h2>🏆 Результаты моих учеников</h2>
+<p style="margin-bottom: 15px; font-size: 14px;">Реальные фотографии моих клиентов — от преображения тела до спортивных титулов</p>
+
+<div class="results-gallery">
+    
+    <!-- До/После трансформация -->
+    <div class="result-type">
+        <div class="badge">🔥 Трансформация тела</div>
+        <div class="result-card">
+            <img src="lena.jpg" alt="Результат клиентки Лена: до и после">
+            <div class="result-caption">
+                Лена — <span>результат за 3 месяца работы</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Достижения и награждения -->
+    <div class="result-type">
+        <div class="badge">🏅 Спортивные достижения</div>
+        
+        <div class="result-card">
+            <img src="kola.jpg" alt="Мой ученик стал Мастером спорта России">
+            <div class="result-caption">
+                Коля — <span>Мастер спорта России! Горжусь своим учеником 🔥</span>
+            </div>
+        </div>
+        
+        <div class="result-card">
+            <img src="devki.jpg" alt="Награждение моих учениц">
+            <div class="result-caption">
+                Мои ученицы — <span>награждение по итогам соревнований 🏆</span>
+            </div>
+        </div>
+        
+        <div class="result-card">
+            <img src="lena2.jpg" alt="Награждение ученицы Лены">
+            <div class="result-caption">
+                Лена — <span>награждение за высокие результаты 💪</span>
+            </div>
+        </div>
+        
+        <div class="result-card">
+            <img src="olga.jpg" alt="Награждение ученицы Ольги">
+            <div class="result-caption">
+                Ольга — <span>достойный результат на соревнованиях ✨</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p style="margin-top: 15px; font-size: 13px; opacity: 0.7; text-align: center;">
+Фото опубликованы с согласия учеников. Каждый из них прошел программу сопровождения.
+</p>
 </div>
 
 <div class="section">
