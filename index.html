@@ -28,6 +28,8 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            margin: 0;
+            padding: 0;
         }
 
         /* ----- ЭКРАН ЗАГРУЗКИ (ПРЕЛОАДЕР) ----- */
@@ -149,25 +151,15 @@
             max-width: 460px;
             width: 100%;
             padding: 40px 20px;
-            animation: fadeInMain 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+            margin: 0 auto;
+            position: relative;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: opacity 0.6s ease;
         }
 
-        /* главный контент становится видимым только после скрытия прелоадера, но плавно */
+        /* контент становится видимым */
         .main-content.visible {
             opacity: 1;
-        }
-
-        @keyframes fadeInMain {
-            0% {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .section {
@@ -251,7 +243,7 @@
 
         /* Адаптивность */
         @media (max-width: 480px) {
-            .container {
+            .main-content {
                 padding: 20px 16px;
             }
             .deep-quote {
@@ -269,8 +261,8 @@
 <!-- ПРЕЛОАДЕР С ФОТО И ГЛУБОКОЙ ФРАЗОЙ -->
 <div id="preloader" class="preloader">
     <div class="preloader-content">
-        <!-- Ваше фото (avatar.jpg) будет отображаться в центре загрузки -->
-        <img class="preloader-avatar" src="phone.jpg" alt="Blagov Aleksandr loading">
+        <!-- Ваше фото -->
+        <img class="preloader-avatar" src="avatar.jpg" alt="Blagov Aleksandr loading">
         <div class="deep-quote">
             «Сила рождается там,<br> где разум встречает дисциплину»
         </div>
@@ -282,66 +274,64 @@
 
 <!-- ОСНОВНОЙ КОНТЕНТ ГЛАВНОЙ СТРАНИЦЫ -->
 <div class="main-content" id="mainContent">
-    <img class="avatar" src="avatar.jpg" alt="Blagov Aleksandr">
-    <h1>Blagov Aleksandr</h1>
-    <p class="subtitle">
-        🏆 Персональный тренер<br>
-        🏋️ Более 15 лет в фитнесе
-    </p>
+    <div style="text-align: center;">
+        <img class="avatar" src="avatar.jpg" alt="Blagov Aleksandr">
+        <h1>Blagov Aleksandr</h1>
+        <p class="subtitle">
+            🏆 Персональный тренер<br>
+            🏋️ Более 15 лет в фитнесе
+        </p>
 
-    <p style="opacity:0.6;margin-bottom:15px;">
-        ⬇️ Выберите вариант
-    </p>
+        <p style="opacity:0.6;margin-bottom:15px;">
+            ⬇️ Выберите вариант
+        </p>
 
-    <a class="link" href="online.html">
-        🔥 Онлайн тренировки
-    </a>
+        <a class="link" href="online.html">
+            🔥 Онлайн тренировки
+        </a>
 
-    <a class="link primary glow" href="https://t.me/blagovfit" target="_blank">
-        💬 Написать в Telegram
-    </a>
+        <a class="link primary glow" href="https://t.me/blagovfit" target="_blank">
+            💬 Написать в Telegram
+        </a>
 
-    <a class="link" href="https://instagram.com/blagov.fit" target="_blank">
-        📸 Instagram
-    </a>
+        <a class="link" href="https://instagram.com/blagov.fit" target="_blank">
+            📸 Instagram
+        </a>
 
-    <a class="link" href="gym.html">
-        🏋️ Тренировки в зале
-    </a>
+        <a class="link" href="gym.html">
+            🏋️ Тренировки в зале
+        </a>
 
-    <div class="footer">
-        Профессиональный тренер
+        <div class="footer">
+            Профессиональный тренер
+        </div>
     </div>
 </div>
 
 <script>
     (function() {
-        // Ждём полной загрузки DOM и всех медиа (чтобы фото точно отобразилось в прелоадере)
+        // Ждём полной загрузки DOM и всех медиа
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             const mainContent = document.getElementById('mainContent');
             
-            // Небольшая задержка для эстетики — чтобы фраза успела "заиграть"
-            // Минимальная длительность показа прелоадера: не менее 1.8 секунд для плавного восприятия
-            // Но если фото загрузилось быстрее, все равно показываем красивый переход.
-            // Делаем минимальное время показа 1800мс, чтобы пользователь успел прочувствовать глубокую фразу.
-            const MIN_DISPLAY_TIME = 1800; // 1.8 секунды
-            
+            // Минимальная длительность показа прелоадера: 1.8 секунды
+            const MIN_DISPLAY_TIME = 1800;
             const startTime = performance.now();
             
             function hidePreloader() {
                 // Добавляем класс для исчезновения
                 preloader.classList.add('hide');
-                // После окончания анимации делаем основной контент видимым
+                // После начала анимации делаем основной контент видимым
                 setTimeout(() => {
                     mainContent.classList.add('visible');
-                    // Полностью удаляем прелоадер из DOM через 300мс после скрытия (чистота)
-                    setTimeout(() => {
-                        if (preloader && preloader.parentNode) {
-                            preloader.style.display = 'none';
-                        }
-                    }, 300);
-                }, 200);
+                }, 150);
+                // Полностью удаляем прелоадер из DOM через 500мс после скрытия
+                setTimeout(() => {
+                    if (preloader && preloader.parentNode) {
+                        preloader.style.display = 'none';
+                    }
+                }, 500);
             }
             
             function checkAndHide() {
@@ -349,32 +339,22 @@
                 const remaining = MIN_DISPLAY_TIME - elapsed;
                 
                 if (remaining > 0) {
-                    // Ждем, чтобы минимальное время показа соблюсти
                     setTimeout(() => {
                         hidePreloader();
                     }, remaining);
                 } else {
-                    // Уже прошло достаточно времени — скрываем сразу
                     hidePreloader();
                 }
             }
             
-            // Дополнительно: если картинка avatar.jpg долго грузится, прелоадер будет держаться
-            // пока не загрузится хотя бы основное фото (чтобы не было моргания). Но поскольку
-            // мы используем то же фото, что и в main, а оно кэшируется — всё плавно.
-            // Также убедимся, что main-контент изначально невидим, чтобы не было "дубляжа"
-            mainContent.classList.remove('visible'); // гарантия скрытости
-            mainContent.style.opacity = "0";
+            // Убедимся, что main-контент изначально скрыт
+            mainContent.classList.remove('visible');
             
-            // Форсируем стиль: mainContent изначально прозрачный до появления класса visible
-            // но наш CSS уже задает opacity:0 для .main-content без класса visible, дополнительно защитим
-            
-            // Запускаем механизм скрытия с учетом минимальной задержки
+            // Запускаем скрытие прелоадера
             checkAndHide();
         });
         
-        // fallback: если вдруг load не сработал из-за странных кешей, но обычно всё ок.
-        // дополнительно делаем защиту: если через 3 секунды прелоадер всё ещё активен — убираем принудительно
+        // Fallback: если load не сработал, через 3 секунды убираем принудительно
         setTimeout(function() {
             const preloaderStill = document.getElementById('preloader');
             const mainBlock = document.getElementById('mainContent');
