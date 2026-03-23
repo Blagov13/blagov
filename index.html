@@ -1,169 +1,392 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="5× World Champion. Онлайн тренировки и подготовка.">
+    <title>Благов Александр | Профессиональный тренер</title>
+    <style>
+        /* ----- БАЗОВЫЕ СТИЛИ ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="5× World Champion. Онлайн тренировки и подготовка.">
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
 
-<title>Благов Александр | Профессиональный тренер</title>
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: linear-gradient(180deg, #0a0a0a, #1a1a1a, #0a0a0a);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
 
-<style>
+        /* ----- ЭКРАН ЗАГРУЗКИ (ПРЕЛОАДЕР) ----- */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #030303;
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1), visibility 0s linear 1.3s;
+            opacity: 1;
+            visibility: visible;
+            backdrop-filter: blur(0px);
+        }
 
-html, body{
-height:100%;
-}
+        .preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:linear-gradient(180deg,#0a0a0a,#1a1a1a,#0a0a0a);
-color:white;
-text-align:center;
-min-height:100vh;
-display:flex;
-justify-content:center;
-}
+        .preloader-content {
+            text-align: center;
+            max-width: 85%;
+            animation: fadeScaleIn 1.2s ease-out forwards;
+        }
 
-.container{
-max-width:460px;
-width:100%;
-padding:40px 20px;
-animation:fade 0.8s ease;
-}
+        /* Фото в прелоадере — акцент на портрет */
+        .preloader-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 30px rgba(255, 208, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 32px;
+            border: 2px solid rgba(255, 208, 0, 0.6);
+            animation: softPulse 1.6s infinite alternate;
+        }
 
-@keyframes fade{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
+        /* Глубокая фраза с анимацией появления */
+        .deep-quote {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #FFD966, #FFB347);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: quoteReveal 1.2s 0.3s forwards;
+        }
 
-.section{
-margin-top:30px;
-background:rgba(26,26,26,0.8);
-padding:20px;
-border-radius:14px;
-backdrop-filter:blur(6px);
-border:1px solid rgba(255,255,255,0.05);
-box-shadow:0 10px 30px rgba(0,0,0,0.35);
-}
+        .sub-quote {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.8s forwards;
+        }
 
-.avatar{
-width:140px;
-height:140px;
-border-radius:50%;
-object-fit:cover;
-margin-bottom:20px;
-}
+        /* анимации прелоадера */
+        @keyframes fadeScaleIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-h1{
-margin:0;
-font-size:28px;
-}
+        @keyframes quoteReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.subtitle{
-opacity:0.8;
-margin-top:8px;
-margin-bottom:30px;
-line-height:1.5;
-}
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.link{
-display:block;
-background:white;
-color:black;
-padding:15px;
-margin-top:16px;
-border-radius:14px;
-text-decoration:none;
-font-weight:bold;
-transition:all 0.25s ease;
-box-shadow:0 8px 20px rgba(0,0,0,0.25);
-}
+        @keyframes softPulse {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 208, 0, 0.3), 0 0 0px rgba(255, 208, 0, 0.2);
+                border-color: rgba(255, 208, 0, 0.5);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 28px rgba(255, 208, 0, 0.8), 0 0 12px rgba(255, 200, 0, 0.5);
+                border-color: rgba(255, 208, 0, 0.95);
+                transform: scale(1.02);
+            }
+        }
 
-.link:hover{
-transform:translateY(-3px);
-box-shadow:0 14px 30px rgba(0,0,0,0.35);
-}
+        /* ----- ОСНОВНОЙ КОНТЕНТ (появляется после прелоадера) ----- */
+        .main-content {
+            max-width: 460px;
+            width: 100%;
+            padding: 40px 20px;
+            animation: fadeInMain 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
 
-.primary{
-background:#ffd000;
-color:black;
-}
+        /* главный контент становится видимым только после скрытия прелоадера, но плавно */
+        .main-content.visible {
+            opacity: 1;
+        }
 
-/* Glow эффект */
+        @keyframes fadeInMain {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-@keyframes glow{
-0%{
-box-shadow:0 0 5px rgba(255,208,0,0.4);
-}
-50%{
-box-shadow:0 0 20px rgba(255,208,0,0.9);
-}
-100%{
-box-shadow:0 0 5px rgba(255,208,0,0.4);
-}
-}
+        .section {
+            margin-top: 30px;
+            background: rgba(26, 26, 26, 0.8);
+            padding: 20px;
+            border-radius: 14px;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
 
-.glow{
-animation:glow 2s infinite;
-}
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 208, 0, 0.4);
+            transition: transform 0.2s;
+        }
 
-.footer{
-margin-top:40px;
-opacity:0.5;
-font-size:14px;
-}
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
 
-</style>
+        .subtitle {
+            opacity: 0.8;
+            margin-top: 8px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
 
+        .link {
+            display: block;
+            background: white;
+            color: black;
+            padding: 15px;
+            margin-top: 16px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .primary {
+            background: #ffd000;
+            color: black;
+        }
+
+        /* Glow эффект для телеграм кнопки */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(255, 208, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 208, 0, 0.9);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(255, 208, 0, 0.4);
+            }
+        }
+
+        .glow {
+            animation: glow 2s infinite;
+        }
+
+        .footer {
+            margin-top: 40px;
+            opacity: 0.5;
+            font-size: 14px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 16px;
+            }
+            .deep-quote {
+                font-size: 1.2rem;
+            }
+            .preloader-avatar {
+                width: 130px;
+                height: 130px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<img class="avatar" src="avatar.jpg" alt="Blagov Aleksandr">
-
-<h1>Blagov Aleksandr</h1>
-
-<p class="subtitle">
-🏆 Персональный тренер<br>
-🏋️ Более 15 лет в фитнесе
-</p>
-
-<p style="opacity:0.6;margin-bottom:15px;">
-⬇️ Выберите вариант
-</p>
-
-<a class="link" href="online.html">
-🔥 Онлайн тренировки
-</a>
-
-<a class="link primary glow" href="https://t.me/blagovfit" target="_blank">
-💬 Написать в Telegram
-</a>
-
-<a class="link" href="https://instagram.com/blagov.fit" target="_blank">
-📸 Instagram
-</a>
-
-<a class="link" href="gym.html">
-🏋️ Тренировки в зале
-</a>
-
-<div class="footer">
-Профессиональный тренер
+<!-- ПРЕЛОАДЕР С ФОТО И ГЛУБОКОЙ ФРАЗОЙ -->
+<div id="preloader" class="preloader">
+    <div class="preloader-content">
+        <!-- Ваше фото (avatar.jpg) будет отображаться в центре загрузки -->
+        <img class="preloader-avatar" src="phone.jpg" alt="Blagov Aleksandr loading">
+        <div class="deep-quote">
+            «Сила рождается там,<br> где разум встречает дисциплину»
+        </div>
+        <div class="sub-quote">
+            — Blagov Aleksandr, 5× World Champion
+        </div>
+    </div>
 </div>
 
+<!-- ОСНОВНОЙ КОНТЕНТ ГЛАВНОЙ СТРАНИЦЫ -->
+<div class="main-content" id="mainContent">
+    <img class="avatar" src="avatar.jpg" alt="Blagov Aleksandr">
+    <h1>Blagov Aleksandr</h1>
+    <p class="subtitle">
+        🏆 Персональный тренер<br>
+        🏋️ Более 15 лет в фитнесе
+    </p>
+
+    <p style="opacity:0.6;margin-bottom:15px;">
+        ⬇️ Выберите вариант
+    </p>
+
+    <a class="link" href="online.html">
+        🔥 Онлайн тренировки
+    </a>
+
+    <a class="link primary glow" href="https://t.me/blagovfit" target="_blank">
+        💬 Написать в Telegram
+    </a>
+
+    <a class="link" href="https://instagram.com/blagov.fit" target="_blank">
+        📸 Instagram
+    </a>
+
+    <a class="link" href="gym.html">
+        🏋️ Тренировки в зале
+    </a>
+
+    <div class="footer">
+        Профессиональный тренер
+    </div>
 </div>
 
+<script>
+    (function() {
+        // Ждём полной загрузки DOM и всех медиа (чтобы фото точно отобразилось в прелоадере)
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('mainContent');
+            
+            // Небольшая задержка для эстетики — чтобы фраза успела "заиграть"
+            // Минимальная длительность показа прелоадера: не менее 1.8 секунд для плавного восприятия
+            // Но если фото загрузилось быстрее, все равно показываем красивый переход.
+            // Делаем минимальное время показа 1800мс, чтобы пользователь успел прочувствовать глубокую фразу.
+            const MIN_DISPLAY_TIME = 1800; // 1.8 секунды
+            
+            const startTime = performance.now();
+            
+            function hidePreloader() {
+                // Добавляем класс для исчезновения
+                preloader.classList.add('hide');
+                // После окончания анимации делаем основной контент видимым
+                setTimeout(() => {
+                    mainContent.classList.add('visible');
+                    // Полностью удаляем прелоадер из DOM через 300мс после скрытия (чистота)
+                    setTimeout(() => {
+                        if (preloader && preloader.parentNode) {
+                            preloader.style.display = 'none';
+                        }
+                    }, 300);
+                }, 200);
+            }
+            
+            function checkAndHide() {
+                const elapsed = performance.now() - startTime;
+                const remaining = MIN_DISPLAY_TIME - elapsed;
+                
+                if (remaining > 0) {
+                    // Ждем, чтобы минимальное время показа соблюсти
+                    setTimeout(() => {
+                        hidePreloader();
+                    }, remaining);
+                } else {
+                    // Уже прошло достаточно времени — скрываем сразу
+                    hidePreloader();
+                }
+            }
+            
+            // Дополнительно: если картинка avatar.jpg долго грузится, прелоадер будет держаться
+            // пока не загрузится хотя бы основное фото (чтобы не было моргания). Но поскольку
+            // мы используем то же фото, что и в main, а оно кэшируется — всё плавно.
+            // Также убедимся, что main-контент изначально невидим, чтобы не было "дубляжа"
+            mainContent.classList.remove('visible'); // гарантия скрытости
+            mainContent.style.opacity = "0";
+            
+            // Форсируем стиль: mainContent изначально прозрачный до появления класса visible
+            // но наш CSS уже задает opacity:0 для .main-content без класса visible, дополнительно защитим
+            
+            // Запускаем механизм скрытия с учетом минимальной задержки
+            checkAndHide();
+        });
+        
+        // fallback: если вдруг load не сработал из-за странных кешей, но обычно всё ок.
+        // дополнительно делаем защиту: если через 3 секунды прелоадер всё ещё активен — убираем принудительно
+        setTimeout(function() {
+            const preloaderStill = document.getElementById('preloader');
+            const mainBlock = document.getElementById('mainContent');
+            if (preloaderStill && !preloaderStill.classList.contains('hide')) {
+                preloaderStill.classList.add('hide');
+                setTimeout(() => {
+                    if (mainBlock) mainBlock.classList.add('visible');
+                    if (preloaderStill) preloaderStill.style.display = 'none';
+                }, 300);
+            }
+        }, 3200);
+    })();
+</script>
 </body>
-
 </html>
